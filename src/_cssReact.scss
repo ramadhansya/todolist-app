@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap');
+
+:root {
+  --font: 'Josefin Sans', sans-serif;
+  // PRIMARY COLOR
+  --navTodo: hsl(220, 98%, 61%);
+  --CheckBackground: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+  // LIGHT MODE COLOR
+  --background: hsl(0, 0%, 98%);
+  --cardTodo: hsl(236, 33%, 92%);
+  --textTodoActive: hsl(233, 11%, 84%);
+  --placeholderTodo: hsl(236, 9%, 61%);
+  --textTodo: hsl(235, 19%, 35%);
+  --hover: hsl(235, 19%, 35%);
+
+  --support1: hsl(233, 14%, 35%);
+  --support2: hsl(237, 14%, 26%);
+}
+
+html[data-colormode='dark'] {
+  --background: hsl(235, 21%, 11%);
+  --cardTodo: hsl(235, 24%, 19%);
+  --textTodo: hsl(234, 39%, 85%);
+  --placeholderTodo: hsl(234, 11%, 52%);
+  --textTodoActive: hsl(233, 14%, 35%);
+  --hover: hsl(234, 39%, 85%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
