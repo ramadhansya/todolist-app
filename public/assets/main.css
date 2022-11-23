@@ -9,6 +9,7 @@
   --placeholderTodo: hsl(236, 9%, 61%);
   --textTodo: hsl(235, 19%, 35%);
   --hover: hsl(235, 19%, 35%);
+  --bgBanner: url('images/bg-desktop-light.jpg');
   --support1: hsl(233, 14%, 35%);
   --support2: hsl(237, 14%, 26%);
 }
@@ -20,6 +21,7 @@ html[data-colormode='dark'] {
   --placeholderTodo: hsl(234, 11%, 52%);
   --textTodoActive: hsl(233, 14%, 35%);
   --hover: hsl(234, 39%, 85%);
+  --bgBanner: url('images/bg-desktop-dark.jpg');
 }
 
 * {
@@ -27,5 +29,37 @@ html[data-colormode='dark'] {
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: var(--background);
+}
+
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background: var(--bgBanner);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --bgBanner: url('images/bg-mobile-light.jpg');
+  }
+  html[data-colormode='dark'] {
+    --bgBanner: url('images/bg-mobile-dark.jpg');
+  }
 }
 /*# sourceMappingURL=main.css.map */
