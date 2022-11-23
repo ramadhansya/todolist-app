@@ -14,6 +14,7 @@
   --textTodo: hsl(235, 19%, 35%);
   --hover: hsl(235, 19%, 35%);
   --bgBanner: url('images/bg-desktop-light.jpg');
+  --iconToggle: url('images/icon-moon.svg');
 
   --support1: hsl(233, 14%, 35%);
   --support2: hsl(237, 14%, 26%);
@@ -28,6 +29,8 @@ html[data-colormode='dark'] {
   --hover: hsl(234, 39%, 85%);
 
   --bgBanner: url('images/bg-desktop-dark.jpg');
+
+  --iconToggle: url('images/icon-sun.svg');
 }
 
 * {
@@ -43,6 +46,8 @@ body {
   width: 100%;
   height: 100vh;
   background: var(--background);
+  display: grid;
+  place-items: center;
 }
 
 // code for section banner
@@ -56,6 +61,43 @@ body {
   background-size: cover;
   background-position: center;
   overflow: hidden;
+  background-repeat: no-repeat;
+}
+
+// CODE FOR CONTAINER TODO
+.container-todo {
+  position: relative;
+  width: 500px;
+  border: 1px solid red;
+  font-family: var(--font);
+  padding-bottom: 100px;
+  // code for nav todo
+  .nav-todo {
+    position: relative;
+    width: 100%;
+    border: 1px solid cyan;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-auto-rows: auto;
+
+    .title-nav {
+      font-size: 2.5em;
+      color: #fff;
+      padding-top: 0.2em;
+      letter-spacing: 8px;
+    }
+
+    .toggle-nav {
+      width: 50px;
+      display: grid;
+      place-items: center;
+      border: none;
+      cursor: pointer;
+      background: var(--iconToggle);
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
 }
 
 // MEDIA < 768PX
