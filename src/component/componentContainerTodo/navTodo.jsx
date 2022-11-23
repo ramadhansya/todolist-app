@@ -22,7 +22,6 @@ const NavTodo =()=>{
         //  get data localStorage
         let dataLocalStorage = localStorage.getItem('mode')
         html.dataset.colormode = dataLocalStorage;
-
         // set data
         setLocal(dataLocalStorage)
         // set html
