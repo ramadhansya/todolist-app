@@ -150,6 +150,13 @@ body {
       }
     }
   }
+
+  // CODE FOR SECTION TODOLIST CONTAINER
+  .todo-list-container {
+    position: 'relative';
+    width: 100%;
+    background: var(--cardTodo);
+  }
 }
 
 // MEDIA < 768PX
