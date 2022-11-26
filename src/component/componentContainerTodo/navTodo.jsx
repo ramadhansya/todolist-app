@@ -8,7 +8,7 @@ const NavTodo =()=>{
     // state for dom Html 
     const [domHtml,setDomHtml] = useState(null);
 
-    // state for data mode from localStorate
+    // state for data mode from localStorage
     const [local,setLocal] = useState(null)
 
     useEffect(()=>{
@@ -32,7 +32,7 @@ const NavTodo =()=>{
     // event toggle button 
     const toggleEvent = (e)=>{
        if(domHtml.dataset.colormode === 'dark'){
-           localStorage.setItem('mode','light')
+        localStorage.setItem('mode','light')
         domHtml.dataset.colormode =  localStorage.getItem('mode');
         return
        }else{
