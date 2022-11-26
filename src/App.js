@@ -7,6 +7,7 @@ import BgBanner from './component/bgBanner';
 // import component container Todo
 import ContainerTodo from './component/containerTodo'
 
+
 function App() {
   return (
   <>
@@ -14,6 +15,7 @@ function App() {
   <BgBanner/>
   {/* component container todo */}
   <ContainerTodo/>
+
   </>
   );
 }
