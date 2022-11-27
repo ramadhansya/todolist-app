@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&display=swap');
 
 :root {
   --font: 'Josefin Sans', sans-serif;
@@ -12,6 +12,7 @@
   --checkTodoActive: hsl(233, 11%, 84%);
   --placeholderTodo: hsl(236, 9%, 61%);
   --textTodo: hsl(235, 19%, 35%);
+  --textTodoActive: hsl(233, 11%, 84%);
   --hover: hsl(235, 19%, 35%);
   --bgBanner: url('images/bg-desktop-light.jpg');
   --iconToggle: url('images/icon-moon.svg');
@@ -78,7 +79,6 @@ body {
   width: 500px;
   border: 1px solid red;
   font-family: var(--font);
-  padding-bottom: 100px;
 
   // code for nav todo
   .nav-todo {
@@ -139,7 +139,7 @@ body {
       width: 100%;
       height: 100%;
       outline: none;
-      font-weight: 600;
+      font-weight: 500;
       background: transparent;
       color: var(--textTodo);
       caret-color: var(--caret-color);
@@ -156,8 +156,10 @@ body {
     position: 'relative';
     width: 100%;
     background: var(--cardTodo);
-    height: 280px;
+    height: 250px;
     margin-top: 1.5em;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     .list-item {
       position: relative;
@@ -167,34 +169,65 @@ body {
       display: grid;
       grid-template-columns: auto 1fr auto;
       grid-auto-rows: auto;
-      border: 1px solid red;
+      border-bottom: 1px solid var(--checkTodoActive);
 
+      // CODE FOR CHECK LIST
       .check-list {
         width: 50px;
         height: 100%;
-        border: 1px solid cyan;
         @include center_div();
 
-        input {
-          display: none;
-        }
-        input:checked ~ label {
-          background: var(--CheckBackground);
-        }
-        input:checked ~ label > img {
-          opacity: 1;
-        }
         .circle-list {
           border: 1px solid var(--checkTodoActive);
           @include center_div();
           border-radius: 50%;
           height: 20px;
           width: 20px;
+          cursor: pointer;
+          background: transparent;
+          &:hover {
+            background: var(--CheckBackground);
+          }
+          &:hover img {
+            opacity: 1;
+          }
 
           img {
             opacity: 0;
           }
         }
+      }
+
+      // code for text todo
+      .todo-desc {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        p {
+          margin: 0;
+          padding: 0;
+          color: var(--textTodo);
+          height: 20px;
+          overflow-y: auto;
+          // text-decoration: line-through;
+          margin-top: 0.2em;
+        }
+      }
+      // CODE FOR BUTTON DELETE
+      .delete-todo {
+        width: 50px;
+        height: 100%;
+        border: none;
+        background: transparent;
+        transition: 0.3s;
+        opacity: 0;
+        @include center_div();
+        cursor: pointer;
+      }
+      &:hover .delete-todo {
+        opacity: 1;
       }
     }
   }

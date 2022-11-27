@@ -5,16 +5,15 @@ const ListTodo = ()=>{
     return(
         <div className="list-item">
             <div className="check-list">
-                    <input type="checkbox" name="" id="checkList" />
-                    <label htmlFor="checkList" className="circle-list">
+                    <button className="circle-list">
                         <img src="./assets/images/icon-check.svg" alt="" />
-                    </label>
+                    </button>
             </div>
             <div className="todo-desc">
-
+             <p className="text-todo">belajar react js Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt autem, facilis quos dolores aliquam atque voluptas nesciunt. Nesciunt, sint necessitatibus.</p>
             </div>
             <button className="delete-todo">
-
+            <img src="./assets/images/icon-cross.svg" alt="" />
             </button>
         </div>
     )
@@ -32,6 +31,11 @@ const InputGroup = ()=>{
            <input type="search" placeholder="Create a new Todo...." className="input-todo" />
         </section>
         <section className="todo-list-container">
+           <ListTodo/>
+           <ListTodo/>
+           <ListTodo/>
+           <ListTodo/>
+           <ListTodo/>
            <ListTodo/>
         </section>
         </>
