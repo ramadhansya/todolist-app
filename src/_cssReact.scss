@@ -1,18 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&display=swap');
 
 :root {
   --font: 'Josefin Sans', sans-serif;
   // PRIMARY COLOR
-  --navTodo: hsl(220, 98%, 61%);
-  --CheckBackground: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  --caret-color: hsl(220, 98%, 61%);
+  --CheckBackground: linear-gradient(130deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 
   // LIGHT MODE COLOR
-  --background: hsl(0, 0%, 98%);
-  --cardTodo: hsl(236, 33%, 92%);
-  --textTodoActive: hsl(233, 11%, 84%);
+  --cardTodo: hsl(0, 0%, 98%);
+  --background: hsl(236, 33%, 92%);
+  --checkTodoActive: hsl(233, 11%, 84%);
   --placeholderTodo: hsl(236, 9%, 61%);
   --textTodo: hsl(235, 19%, 35%);
-  --hover: hsl(235, 19%, 35%);
+  --textTodoActive: hsl(233, 11%, 84%);
+  --text-sorting: hsl(236, 9%, 61%);
+  --hover: hsl(233, 14%, 35%);
   --bgBanner: url('images/bg-desktop-light.jpg');
   --iconToggle: url('images/icon-moon.svg');
 
@@ -26,6 +28,8 @@ html[data-colormode='dark'] {
   --textTodo: hsl(234, 39%, 85%);
   --placeholderTodo: hsl(234, 11%, 52%);
   --textTodoActive: hsl(233, 14%, 35%);
+  --text-sorting: hsl(233, 14%, 35%);
+  --checkTodoActive: hsl(233, 14%, 35%);
   --hover: hsl(234, 39%, 85%);
 
   --bgBanner: url('images/bg-desktop-dark.jpg');
@@ -48,6 +52,7 @@ body {
   background: var(--background);
   display: grid;
   place-items: center;
+  overflow-x: hidden;
 }
 
 // code for section banner
@@ -65,17 +70,20 @@ body {
 }
 
 // CODE FOR CONTAINER TODO
+// mixin center div using grid
+@mixin center_div() {
+  display: grid;
+  place-items: center;
+}
+
 .container-todo {
   position: relative;
   width: 500px;
-  border: 1px solid red;
   font-family: var(--font);
-  padding-bottom: 100px;
   // code for nav todo
   .nav-todo {
     position: relative;
     width: 100%;
-    border: 1px solid cyan;
     display: grid;
     grid-template-columns: 1fr auto;
     grid-auto-rows: auto;
@@ -98,6 +106,193 @@ body {
       background-position: center;
     }
   }
+
+  // CODE FOR INPUT GROUP
+  .input-group {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background: var(--cardTodo);
+    border-radius: 0.3em;
+    margin-top: 1.5em;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-auto-rows: auto;
+    overflow: hidden;
+    font-family: var(--font);
+
+    .input-check {
+      width: 50px;
+      height: 100%;
+      @include center_div();
+      padding: 0.5em;
+
+      div {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid var(--checkTodoActive);
+      }
+    }
+
+    .input-todo {
+      width: 100%;
+      height: 100%;
+      outline: none;
+      font-weight: 700;
+      background: transparent;
+      color: var(--textTodo);
+      caret-color: var(--caret-color);
+      border: none;
+      padding-right: 1.5em;
+      &::placeholder {
+        font-weight: 500;
+        color: var(--textTodo);
+      }
+    }
+  }
+
+  // CODE FOR SECTION TODOLIST CONTAINER
+  .todo-list-container {
+    position: relative;
+    width: 100%;
+    background: var(--cardTodo);
+    height: 250px;
+    margin-top: 1.5em;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    .list-item {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      grid-auto-rows: auto;
+      border-bottom: 1px solid var(--checkTodoActive);
+
+      // CODE FOR CHECK LIST
+      .check-list {
+        width: 50px;
+        height: 100%;
+        @include center_div();
+
+        .circle-list {
+          border: 1px solid var(--checkTodoActive);
+          @include center_div();
+          border-radius: 50%;
+          height: 20px;
+          width: 20px;
+          cursor: pointer;
+          background: transparent;
+          &:hover {
+            background: var(--CheckBackground);
+          }
+          &:hover img {
+            opacity: 1;
+          }
+
+          img {
+            opacity: 0;
+          }
+        }
+      }
+
+      // code for text todo
+      .todo-desc {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        p {
+          margin: 0;
+          padding: 0;
+          color: var(--textTodo);
+          height: 20px;
+          overflow-y: auto;
+          // text-decoration: line-through;
+          margin-top: 0.2em;
+        }
+      }
+      // CODE FOR BUTTON DELETE
+      .delete-todo {
+        width: 50px;
+        height: 100%;
+        border: none;
+        background: transparent;
+        transition: 0.3s;
+        opacity: 0;
+        @include center_div();
+        cursor: pointer;
+      }
+      &:hover .delete-todo {
+        opacity: 1;
+      }
+    }
+  }
+
+  // code for section sorting todolist
+  .sorting-todo {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background: var(--cardTodo);
+    border-top: 1px solid var(--checkTodoActive);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-auto-rows: auto;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    color: var(--text-sorting);
+    font-weight: 600;
+
+    // sortin button
+    .sorting-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.7em;
+
+      button {
+        border: none;
+        padding: 0.2em 0.5em;
+        background: transparent;
+        font-weight: 600;
+        text-transform: capitalize;
+        color: var(--text-sorting);
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+          color: var(--hover);
+        }
+      }
+    }
+
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0 0.2em;
+      font-size: 0.9em;
+    }
+    .jumlah-todo {
+      gap: 0.2em;
+      padding-left: 1em;
+    }
+    .clear-todo {
+      padding-right: 1em;
+      transition: 0.2s;
+      cursor: pointer;
+      &:hover {
+        color: var(--hover);
+      }
+    }
+  }
 }
 
 // MEDIA < 768PX
@@ -108,5 +303,34 @@ body {
 
   html[data-colormode='dark'] {
     --bgBanner: url('images/bg-mobile-dark.jpg');
+  }
+
+  .container-todo {
+    .sorting-todo {
+      grid-template-columns: 1fr 1fr;
+
+      .sorting-item {
+        position: absolute;
+        bottom: -4em;
+        border-radius: 0.5em;
+        width: 100%;
+        height: 50px;
+        background-color: var(--cardTodo);
+      }
+      .jumlah-todo {
+        justify-self: start;
+      }
+      .clear-todo {
+        justify-self: end;
+      }
+    }
+  }
+}
+
+// MEDIA < 550PX
+@media screen and (max-width: 550px) {
+  .container-todo {
+    width: 100%;
+    padding: 0 1.5em;
   }
 }
