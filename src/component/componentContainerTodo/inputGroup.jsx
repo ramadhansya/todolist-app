@@ -19,8 +19,25 @@ const ListTodo = ()=>{
     )
 }
 
-// component input group
+// COMPONENT SORTING TODO
+const SortingTodo = ()=>{
+    return(
+        <section className="sorting-todo">
+            <p className="jumlah-todo"><span className="count">0</span>items left</p>
+            <div className="sorting-item">
+                <button className="sorting-all">all</button>
+                <button className="sorting-active">active</button>
+                <button className="sorting-completed">completed</button>
+            </div>
+            <p className="clear-todo">
+                Clear Complited
+            </p>
+        </section>
+    )
+}
 
+
+// component input group
 const InputGroup = ()=>{
     return(
         <>
@@ -34,10 +51,8 @@ const InputGroup = ()=>{
            <ListTodo/>
            <ListTodo/>
            <ListTodo/>
-           <ListTodo/>
-           <ListTodo/>
-           <ListTodo/>
         </section>
+        <SortingTodo/>
         </>
     )
 }

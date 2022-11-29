@@ -13,7 +13,8 @@
   --placeholderTodo: hsl(236, 9%, 61%);
   --textTodo: hsl(235, 19%, 35%);
   --textTodoActive: hsl(233, 11%, 84%);
-  --hover: hsl(235, 19%, 35%);
+  --text-sorting: hsl(236, 9%, 61%);
+  --hover: hsl(233, 14%, 35%);
   --bgBanner: url('images/bg-desktop-light.jpg');
   --iconToggle: url('images/icon-moon.svg');
 
@@ -27,7 +28,7 @@ html[data-colormode='dark'] {
   --textTodo: hsl(234, 39%, 85%);
   --placeholderTodo: hsl(234, 11%, 52%);
   --textTodoActive: hsl(233, 14%, 35%);
-
+  --text-sorting: hsl(233, 14%, 35%);
   --checkTodoActive: hsl(233, 14%, 35%);
   --hover: hsl(234, 39%, 85%);
 
@@ -51,6 +52,7 @@ body {
   background: var(--background);
   display: grid;
   place-items: center;
+  overflow-x: hidden;
 }
 
 // code for section banner
@@ -77,9 +79,7 @@ body {
 .container-todo {
   position: relative;
   width: 500px;
-  border: 1px solid red;
   font-family: var(--font);
-
   // code for nav todo
   .nav-todo {
     position: relative;
@@ -119,7 +119,7 @@ body {
     grid-template-columns: auto 1fr;
     grid-auto-rows: auto;
     overflow: hidden;
-    font-familiy: var(--font);
+    font-family: var(--font);
 
     .input-check {
       width: 50px;
@@ -139,13 +139,14 @@ body {
       width: 100%;
       height: 100%;
       outline: none;
-      font-weight: 500;
+      font-weight: 700;
       background: transparent;
       color: var(--textTodo);
       caret-color: var(--caret-color);
       border: none;
       padding-right: 1.5em;
       &::placeholder {
+        font-weight: 500;
         color: var(--textTodo);
       }
     }
@@ -153,7 +154,7 @@ body {
 
   // CODE FOR SECTION TODOLIST CONTAINER
   .todo-list-container {
-    position: 'relative';
+    position: relative;
     width: 100%;
     background: var(--cardTodo);
     height: 250px;
@@ -161,6 +162,8 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
 
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
     .list-item {
       position: relative;
       width: 100%;
@@ -231,6 +234,65 @@ body {
       }
     }
   }
+
+  // code for section sorting todolist
+  .sorting-todo {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background: var(--cardTodo);
+    border-top: 1px solid var(--checkTodoActive);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-auto-rows: auto;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    color: var(--text-sorting);
+    font-weight: 600;
+
+    // sortin button
+    .sorting-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.7em;
+
+      button {
+        border: none;
+        padding: 0.2em 0.5em;
+        background: transparent;
+        font-weight: 600;
+        text-transform: capitalize;
+        color: var(--text-sorting);
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+          color: var(--hover);
+        }
+      }
+    }
+
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0 0.2em;
+      font-size: 0.9em;
+    }
+    .jumlah-todo {
+      gap: 0.2em;
+      padding-left: 1em;
+    }
+    .clear-todo {
+      padding-right: 1em;
+      transition: 0.2s;
+      cursor: pointer;
+      &:hover {
+        color: var(--hover);
+      }
+    }
+  }
 }
 
 // MEDIA < 768PX
@@ -241,6 +303,27 @@ body {
 
   html[data-colormode='dark'] {
     --bgBanner: url('images/bg-mobile-dark.jpg');
+  }
+
+  .container-todo {
+    .sorting-todo {
+      grid-template-columns: 1fr 1fr;
+
+      .sorting-item {
+        position: absolute;
+        bottom: -4em;
+        border-radius: 0.5em;
+        width: 100%;
+        height: 50px;
+        background-color: var(--cardTodo);
+      }
+      .jumlah-todo {
+        justify-self: start;
+      }
+      .clear-todo {
+        justify-self: end;
+      }
+    }
   }
 }
 

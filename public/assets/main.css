@@ -9,7 +9,8 @@
   --placeholderTodo: hsl(236, 9%, 61%);
   --textTodo: hsl(235, 19%, 35%);
   --textTodoActive: hsl(233, 11%, 84%);
-  --hover: hsl(235, 19%, 35%);
+  --text-sorting: hsl(236, 9%, 61%);
+  --hover: hsl(233, 14%, 35%);
   --bgBanner: url('images/bg-desktop-light.jpg');
   --iconToggle: url('images/icon-moon.svg');
   --support1: hsl(233, 14%, 35%);
@@ -22,6 +23,7 @@ html[data-colormode='dark'] {
   --textTodo: hsl(234, 39%, 85%);
   --placeholderTodo: hsl(234, 11%, 52%);
   --textTodoActive: hsl(233, 14%, 35%);
+  --text-sorting: hsl(233, 14%, 35%);
   --checkTodoActive: hsl(233, 14%, 35%);
   --hover: hsl(234, 39%, 85%);
   --bgBanner: url('images/bg-desktop-dark.jpg');
@@ -47,6 +49,7 @@ body {
   display: -ms-grid;
   display: grid;
   place-items: center;
+  overflow-x: hidden;
 }
 
 .banner {
@@ -65,7 +68,6 @@ body {
 .container-todo {
   position: relative;
   width: 500px;
-  border: 1px solid red;
   font-family: var(--font);
 }
 
@@ -111,7 +113,7 @@ body {
       grid-template-columns: auto 1fr;
   grid-auto-rows: auto;
   overflow: hidden;
-  font-familiy: var(--font);
+  font-family: var(--font);
 }
 
 .container-todo .input-group .input-check {
@@ -134,7 +136,7 @@ body {
   width: 100%;
   height: 100%;
   outline: none;
-  font-weight: 500;
+  font-weight: 700;
   background: transparent;
   color: var(--textTodo);
   caret-color: var(--caret-color);
@@ -143,29 +145,35 @@ body {
 }
 
 .container-todo .input-group .input-todo::-webkit-input-placeholder {
+  font-weight: 500;
   color: var(--textTodo);
 }
 
 .container-todo .input-group .input-todo:-ms-input-placeholder {
+  font-weight: 500;
   color: var(--textTodo);
 }
 
 .container-todo .input-group .input-todo::-ms-input-placeholder {
+  font-weight: 500;
   color: var(--textTodo);
 }
 
 .container-todo .input-group .input-todo::placeholder {
+  font-weight: 500;
   color: var(--textTodo);
 }
 
 .container-todo .todo-list-container {
-  position: 'relative';
+  position: relative;
   width: 100%;
   background: var(--cardTodo);
   height: 250px;
   margin-top: 1.5em;
   overflow-x: hidden;
   overflow-y: auto;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
 }
 
 .container-todo .todo-list-container .list-item {
@@ -251,12 +259,109 @@ body {
   opacity: 1;
 }
 
+.container-todo .sorting-todo {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background: var(--cardTodo);
+  border-top: 1px solid var(--checkTodoActive);
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr auto;
+      grid-template-columns: auto 1fr auto;
+  grid-auto-rows: auto;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  color: var(--text-sorting);
+  font-weight: 600;
+}
+
+.container-todo .sorting-todo .sorting-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.7em;
+}
+
+.container-todo .sorting-todo .sorting-item button {
+  border: none;
+  padding: 0.2em 0.5em;
+  background: transparent;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--text-sorting);
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.container-todo .sorting-todo .sorting-item button:hover {
+  color: var(--hover);
+}
+
+.container-todo .sorting-todo p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  padding: 0 0.2em;
+  font-size: 0.9em;
+}
+
+.container-todo .sorting-todo .jumlah-todo {
+  gap: 0.2em;
+  padding-left: 1em;
+}
+
+.container-todo .sorting-todo .clear-todo {
+  padding-right: 1em;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.container-todo .sorting-todo .clear-todo:hover {
+  color: var(--hover);
+}
+
 @media screen and (max-width: 768px) {
   :root {
     --bgBanner: url('images/bg-mobile-light.jpg');
   }
   html[data-colormode='dark'] {
     --bgBanner: url('images/bg-mobile-dark.jpg');
+  }
+  .container-todo .sorting-todo {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+  }
+  .container-todo .sorting-todo .sorting-item {
+    position: absolute;
+    bottom: -4em;
+    border-radius: 0.5em;
+    width: 100%;
+    height: 50px;
+    background-color: var(--cardTodo);
+  }
+  .container-todo .sorting-todo .jumlah-todo {
+    -ms-grid-column-align: start;
+        justify-self: start;
+  }
+  .container-todo .sorting-todo .clear-todo {
+    -ms-grid-column-align: end;
+        justify-self: end;
   }
 }
 
