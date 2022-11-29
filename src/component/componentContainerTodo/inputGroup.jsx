@@ -1,4 +1,4 @@
-
+import {useState,useRef,useEffect} from 'react';
 
 // COMPONENT LIST TODO
 const ListTodo = ()=>{
@@ -45,7 +45,7 @@ const InputGroup = ()=>{
            <div className="input-check">
                <div></div>
            </div>
-           <input type="search" placeholder="Create a new Todo...." className="input-todo" />
+           <input type="search" placeholder="Create a new Todo..." className="input-todo" />
         </section>
         <section className="todo-list-container">
            <ListTodo/>
