@@ -109,8 +109,8 @@ body {
   margin-top: 1.5em;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto 1fr;
-      grid-template-columns: auto 1fr;
+  -ms-grid-columns: 1fr auto;
+      grid-template-columns: 1fr auto;
   grid-auto-rows: auto;
   overflow: hidden;
   font-family: var(--font);
@@ -123,13 +123,15 @@ body {
   display: grid;
   place-items: center;
   padding: 0.5em;
+  cursor: pointer;
+  border: none;
+  background: var(--cardTodo);
 }
 
-.container-todo .input-group .input-check div {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 1px solid var(--checkTodoActive);
+.container-todo .input-group .input-check i {
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+  color: var(--caret-color);
 }
 
 .container-todo .input-group .input-todo {
@@ -141,7 +143,8 @@ body {
   color: var(--textTodo);
   caret-color: var(--caret-color);
   border: none;
-  padding-right: 1.5em;
+  padding-left: 1.5em;
+  padding-right: 1em;
 }
 
 .container-todo .input-group .input-todo::-webkit-input-placeholder {

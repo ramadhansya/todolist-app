@@ -1,7 +1,7 @@
 import {useState,useRef,useEffect} from 'react';
 
 // COMPONENT LIST TODO
-const ListTodo = ()=>{
+const ListTodo = ({todo,dataBtnId,eventDelete})=>{
     return(
         <div className="list-item">
             <div className="check-list">
@@ -10,20 +10,24 @@ const ListTodo = ()=>{
                     </button>
             </div>
             <div className="todo-desc">
-             <p className="text-todo">belajar react js Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt autem, facilis quos dolores aliquam atque voluptas nesciunt. Nesciunt, sint necessitatibus.</p>
+             <p className="text-todo">{todo}</p>
             </div>
-            <button className="delete-todo">
-            <img src="./assets/images/icon-cross.svg" alt="" />
+            <button className="delete-todo" >
+            <img src="./assets/images/icon-cross.svg" data-id={dataBtnId}  onClick={eventDelete} className="imgDeleteTodo" alt="" />
             </button>
         </div>
     )
 }
 
 // COMPONENT SORTING TODO
-const SortingTodo = ()=>{
+const SortingTodo = ({todos})=>{
+
+
+
+
     return(
         <section className="sorting-todo">
-            <p className="jumlah-todo"><span className="count">0</span>items left</p>
+            <p className="jumlah-todo"><span className="count">{todos}</span>items left</p>
             <div className="sorting-item">
                 <button className="sorting-all">all</button>
                 <button className="sorting-active">active</button>
@@ -39,22 +43,69 @@ const SortingTodo = ()=>{
 
 // component input group
 const InputGroup = ()=>{
+
+            // state for todo 
+            const [todos,setTodo] = useState([])
+
+            // state for value input
+            const [valueTodo,setValueTodo] = useState('');
+
+            const [id,setId] = useState(1)
+
+            // event untuk ambil value input
+            const inputValue = (e) =>{
+                setValueTodo(e.target.value) 
+                
+            }
+
+            const addTodo = ()=>{
+                if(valueTodo === ''){
+                    alert('todo tidak boleh kosong')
+                    return 
+                }
+                // set object
+                let newTodo = {
+                id:id,
+                todo:valueTodo
+            }
+            setId((oldId) => oldId+=1)
+            setTodo([...todos,newTodo])
+        }
+
+        // event delete todo
+        const deleteTodo = (e)=>{
+            let filter = todos.filter(el => el.id != e.target.dataset.id )
+            
+           setTodo(filter)
+        }
+
+        useEffect(()=>{
+            console.log(todos)
+        },[todos])
+
     return(
         <>
         <section className="input-group">
-           <div className="input-check">
-               <div></div>
-           </div>
-           <input type="search" placeholder="Create a new Todo..." className="input-todo" />
+           <input type="text" placeholder="Create a new Todo..." onChange={inputValue} className="input-todo" />
+           <button className="input-check" onClick={addTodo}>
+               <i className="fa-solid fa-plus"></i>
+           </button>
         </section>
         <section className="todo-list-container">
-           <ListTodo/>
-           <ListTodo/>
-           <ListTodo/>
+        {
+            (todos.length < 1) ? 
+            <ListTodo todo='you dont have any todo' dataBtnId="0"/>
+            :
+            todos.map(e =>{
+                return <ListTodo key={e.id} todo={e.todo} dataBtnId={e.id} eventDelete={deleteTodo}/>
+            }) 
+        }
         </section>
-        <SortingTodo/>
+        <SortingTodo todos={todos.length}/>
         </>
     )
 }
+
+
 
 export default InputGroup;
