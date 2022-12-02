@@ -25,7 +25,7 @@ const ModalDelete =({dataIdModal,eventDelete})=>{
        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
        <div className="modal-dialog bg-transparent">
            <div className="modal-content modal-delete">
-           <div className="modal-body text-center">
+           <div className="modal-body text-center ">
                apakah anda yakin ingin menghapusnya?
            </div>
            <div className="modal-footer">
@@ -55,6 +55,24 @@ const SortingTodo = ({todos})=>{
     )
 }
 
+const AlertUndefinedComponent = ({refElement})=>{
+    
+    return (
+        <>
+        <div className="toast-container position-fixed top-0 end-0 p-3 ">
+        
+        <div className="toast  fade   text-bg-primary hide " ref={refElement} role="alert" aria-live="assertive" aria-atomic="true">
+  <div className="d-flex">
+    <div className="toast-body fs-6">
+    todo tidak boleh kosong
+    </div>
+    <button type="button" className="btn-close me-2 m-auto bg-light" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+        </div>
+        </>
+    )
+}
 // COMPONENT MODAL 
 
 
@@ -74,6 +92,9 @@ const InputGroup = ()=>{
             // state for modal id
             const [idModal,setIdModal] = useState(null)
 
+            // useRef untuk compone AlertUndefinedTodo
+            const alertUndefined = useRef(null)
+
             
 
 
@@ -85,9 +106,11 @@ const InputGroup = ()=>{
             // event untuk tambah todo
             const addTodo = ()=>{
                 if(valueTodo === ''){
-                    alert('todo tidak boleh kosong')
+                    alertUndefined.current.classList.replace('hide','show')
+                    alertUndefined.current.classList.remove('showing')
                     return 
                 }
+                alertUndefined.current.classList.replace('show','hide')
                 // set object
                 let newTodo = {
                 id:id,
@@ -102,6 +125,7 @@ const InputGroup = ()=>{
         // event untuk memberikan data id ke data-idmodal
         const changeIdModal = (e)=>{
               setIdModal(e.target.dataset.id)
+              alertUndefined.current.classList.replace('show','hide')
         }
 
         // event delete todo
@@ -114,6 +138,9 @@ const InputGroup = ()=>{
             return
         }
 
+        useEffect(()=>{
+            console.log(alertUndefined)
+        },[])
         
 
 
@@ -135,8 +162,12 @@ const InputGroup = ()=>{
             }) 
         }
         </section>
+        {/* component sorting todo */}
         <SortingTodo todos={todos.length}/>
+        {/* component modal delete */}
         <ModalDelete dataIdModal={idModal} eventDelete={deleteTodo}/>
+        {/* componet alert input undifed */}
+        <AlertUndefinedComponent refElement={alertUndefined}/>
         </>
     )
 }
