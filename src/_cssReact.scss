@@ -145,8 +145,7 @@ body {
       color: var(--textTodo);
       caret-color: var(--caret-color);
       border: none;
-      padding-left: 1.5em;
-      padding-right: 1em;
+      padding-left: 1em;
       &::placeholder {
         font-weight: 500;
         color: var(--textTodo);
@@ -209,16 +208,12 @@ body {
         height: 100%;
         display: flex;
         align-items: center;
-
-        p {
-          margin: 0;
-          padding: 0;
-          color: var(--textTodo);
-          height: 20px;
-          overflow-y: auto;
-          // text-decoration: line-through;
-          margin-top: 0.2em;
-        }
+        overflow-x: auto;
+        oveflow-y: hidden;
+        color: var(--textTodo);
+        // span {
+        //   // text-decoration: line-through;
+        // }
       }
       // CODE FOR BUTTON DELETE
       .delete-todo {
@@ -293,6 +288,14 @@ body {
       &:hover {
         color: var(--hover);
       }
+    }
+  }
+
+  // modal delete
+  .modal-delete {
+    background: var(--cardTodo);
+    .modal-body {
+      color: var(--textTodo);
     }
   }
 }
