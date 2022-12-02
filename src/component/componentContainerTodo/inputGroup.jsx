@@ -10,7 +10,7 @@ const ListTodo = ({todo,dataBtnId,eventDelete})=>{
                     </button>
             </div>
             <div className="todo-desc">
-             <p className="text-todo">{todo}</p>
+             <p className="text-todo"  >{todo}</p>
             </div>
             <button className="delete-todo" >
             <img src="./assets/images/icon-cross.svg" data-id={dataBtnId}  onClick={eventDelete} className="imgDeleteTodo" alt="" />
@@ -67,26 +67,30 @@ const InputGroup = ()=>{
                 let newTodo = {
                 id:id,
                 todo:valueTodo
-            }
+                }
+                
             setId((oldId) => oldId+=1)
             setTodo([...todos,newTodo])
+            setValueTodo('')
         }
 
         // event delete todo
         const deleteTodo = (e)=>{
-            let filter = todos.filter(el => el.id != e.target.dataset.id )
-            
-           setTodo(filter)
+            let cekDelete = window.confirm('apakah anda yakin ingin menghapusnya?')
+            if(cekDelete){
+                let filter = todos.filter(el => el.id != e.target.dataset.id )
+              setTodo(filter)
+                return    
+            }
+            return
         }
 
-        useEffect(()=>{
-            console.log(todos)
-        },[todos])
+    
 
     return(
         <>
         <section className="input-group">
-           <input type="text" placeholder="Create a new Todo..." onChange={inputValue} className="input-todo" />
+           <input type="text" value={valueTodo} placeholder="Create a new Todo..." onChange={inputValue} className="input-todo" />
            <button className="input-check" onClick={addTodo}>
                <i className="fa-solid fa-plus"></i>
            </button>
@@ -94,7 +98,7 @@ const InputGroup = ()=>{
         <section className="todo-list-container">
         {
             (todos.length < 1) ? 
-            <ListTodo todo='you dont have any todo' dataBtnId="0"/>
+            <ListTodo  todo='you dont have any todo' dataBtnId="0"/>
             :
             todos.map(e =>{
                 return <ListTodo key={e.id} todo={e.todo} dataBtnId={e.id} eventDelete={deleteTodo}/>
