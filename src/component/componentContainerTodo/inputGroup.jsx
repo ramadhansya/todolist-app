@@ -20,6 +20,7 @@ const ListTodo = ({todo,dataBtnId,changeModal})=>{
     )
 }
 
+// COMPONENT MODEL DELETE
 const ModalDelete =({dataIdModal,eventDelete})=>{
     return (
        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -43,11 +44,11 @@ const SortingTodo = ({todos})=>{
     return(
         <section className="sorting-todo">
             <p className="jumlah-todo"><span className="count">{todos}</span>{(todos<1) ? 'item' : 'items left'}</p>
-            <div className="sorting-item">
+            {/* <div className="sorting-item">
                 <button className="sorting-all">all</button>
                 <button className="sorting-active">active</button>
                 <button className="sorting-completed">completed</button>
-            </div>
+            </div> */}
             <p className="clear-todo">
                 Clear Complited
             </p>
@@ -73,7 +74,7 @@ const AlertUndefinedComponent = ({refElement})=>{
         </>
     )
 }
-// COMPONENT MODAL 
+
 
 
 

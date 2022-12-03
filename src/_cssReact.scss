@@ -248,43 +248,44 @@ body {
     font-weight: 600;
 
     // sortin button
-    .sorting-item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.7em;
+    // .sorting-item {
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    //   gap: 0.7em;
 
-      button {
-        border: none;
-        padding: 0.2em 0.5em;
-        background: transparent;
-        font-weight: 600;
-        text-transform: capitalize;
-        color: var(--text-sorting);
-        cursor: pointer;
-        transition: 0.2s;
-        &:hover {
-          color: var(--hover);
-        }
-      }
-    }
+    //   button {
+    //     border: none;
+    //     padding: 0.2em 0.5em;
+    //     background: transparent;
+    //     font-weight: 600;
+    //     text-transform: capitalize;
+    //     color: var(--text-sorting);
+    //     cursor: pointer;
+    //     transition: 0.2s;
+    //     &:hover {
+    //       color: var(--hover);
+    //     }
+    //   }
+    // }
 
     p {
       display: flex;
-      justify-content: center;
-      align-items: center;
       margin: 0;
+      align-items: center;
       padding: 0 0.2em;
       font-size: 0.9em;
     }
     .jumlah-todo {
       gap: 0.2em;
+      justify-content: center;
       padding-left: 1em;
     }
     .clear-todo {
       padding-right: 1em;
       transition: 0.2s;
       cursor: pointer;
+      justify-content: right;
       &:hover {
         color: var(--hover);
       }
@@ -315,14 +316,14 @@ body {
     .sorting-todo {
       grid-template-columns: 1fr 1fr;
 
-      .sorting-item {
-        position: absolute;
-        bottom: -4em;
-        border-radius: 0.5em;
-        width: 100%;
-        height: 50px;
-        background-color: var(--cardTodo);
-      }
+      // .sorting-item {
+      //   position: absolute;
+      //   bottom: -4em;
+      //   border-radius: 0.5em;
+      //   width: 100%;
+      //   height: 50px;
+      //   background-color: var(--cardTodo);
+      // }
       .jumlah-todo {
         justify-self: start;
       }
@@ -338,5 +339,13 @@ body {
   .container-todo {
     width: 100%;
     padding: 0 1.5em;
+  }
+}
+
+// MEDIA MAX HEIGHT 600PX
+@media screen and (max-height: 600px) {
+  #root {
+    height: auto;
+    padding: 6em 1em 5em;
   }
 }
