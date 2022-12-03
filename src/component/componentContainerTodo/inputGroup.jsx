@@ -58,7 +58,7 @@ const InputGroup = ()=>{
                     setTimeout(() => {
                         alertUndefined.current.classList.replace('hide','show')
                     alertUndefined.current.classList.remove('showing')
-                    }, 450);
+                    }, 500);
                     return 
                 }
                 alertUndefined.current.classList.add('showing')
