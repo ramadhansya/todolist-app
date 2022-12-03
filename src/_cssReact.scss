@@ -181,6 +181,9 @@ body {
         height: 100%;
         @include center_div();
 
+        button.circle-list-active {
+          background: var(--CheckBackground);
+        }
         .circle-list {
           border: 1px solid var(--checkTodoActive);
           @include center_div();
@@ -189,10 +192,8 @@ body {
           width: 20px;
           cursor: pointer;
           background: transparent;
-          &:hover {
-            background: var(--CheckBackground);
-          }
-          &:hover img {
+
+          & .img-circle-active {
             opacity: 1;
           }
 
@@ -211,9 +212,13 @@ body {
         overflow-x: auto;
         oveflow-y: hidden;
         color: var(--textTodo);
-        // span {
-        //   // text-decoration: line-through;
-        // }
+        span {
+          transition: 0.3s;
+        }
+        span.text-todo-active {
+          text-decoration: line-through;
+          color: var(--textTodoActive);
+        }
       }
       // CODE FOR BUTTON DELETE
       .delete-todo {

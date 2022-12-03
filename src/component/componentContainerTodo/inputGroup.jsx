@@ -5,8 +5,8 @@ const ListTodo = ({todo,dataBtnId,changeModal,eventCompleted})=>{
     return(
         <div className="list-item">
             <div className="check-list">
-                    <button className="circle-list" onClick={eventCompleted}>
-                        <img src="./assets/images/icon-check.svg" alt="" />
+                    <button className="circle-list" >
+                        <img src="./assets/images/icon-check.svg" className="" onClick={eventCompleted} alt="" />
                     </button>
             </div>
             <div className="todo-desc">
@@ -152,7 +152,13 @@ const InputGroup = ()=>{
 
         // event completed tood
         const completed = (e)=>{
-console.log(e.target)
+            let [textTodo] = e.target.parentElement.parentElement.nextElementSibling.childNodes;
+            console.log(textTodo)
+            console.log(e.target.parentElement)
+            console.log(e.target)
+            e.target.parentElement.classList.toggle('circle-list-active')
+            e.target.classList.toggle('img-circle-active')
+            textTodo.classList.toggle('text-todo-active')
         }
 
 
@@ -173,7 +179,7 @@ console.log(e.target)
             <ListTodo  todo='you dont have any todo' dataBtnId="0"/>
             :
             todos.map(e =>{
-                return <ListTodo key={e.id} todo={e.todo} dataBtnId={e.id} changeModal={changeIdModal} eventComplete={completed}  />
+                return <ListTodo key={e.id} todo={e.todo} dataBtnId={e.id} changeModal={changeIdModal} eventCompleted={completed}  />
             }) 
         }
         </section>

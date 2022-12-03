@@ -199,6 +199,10 @@ body {
   place-items: center;
 }
 
+.container-todo .todo-list-container .list-item .check-list button.circle-list-active {
+  background: var(--CheckBackground);
+}
+
 .container-todo .todo-list-container .list-item .check-list .circle-list {
   border: 1px solid var(--checkTodoActive);
   display: -ms-grid;
@@ -211,11 +215,7 @@ body {
   background: transparent;
 }
 
-.container-todo .todo-list-container .list-item .check-list .circle-list:hover {
-  background: var(--CheckBackground);
-}
-
-.container-todo .todo-list-container .list-item .check-list .circle-list:hover img {
+.container-todo .todo-list-container .list-item .check-list .circle-list .img-circle-active {
   opacity: 1;
 }
 
@@ -235,6 +235,16 @@ body {
   overflow-x: auto;
   oveflow-y: hidden;
   color: var(--textTodo);
+}
+
+.container-todo .todo-list-container .list-item .todo-desc span {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.container-todo .todo-list-container .list-item .todo-desc span.text-todo-active {
+  text-decoration: line-through;
+  color: var(--textTodoActive);
 }
 
 .container-todo .todo-list-container .list-item .delete-todo {
