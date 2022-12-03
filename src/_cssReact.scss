@@ -182,7 +182,7 @@ body {
         @include center_div();
 
         button.circle-list-active {
-          background: var(--CheckBackground);
+          background-image: var(--CheckBackground);
         }
         .circle-list {
           border: 1px solid var(--checkTodoActive);
@@ -191,6 +191,7 @@ body {
           height: 20px;
           width: 20px;
           cursor: pointer;
+          overflow: hidden;
           background: transparent;
 
           & .img-circle-active {
@@ -210,10 +211,10 @@ body {
         display: flex;
         align-items: center;
         overflow-x: auto;
-        oveflow-y: hidden;
+        overflow-y: hidden;
         color: var(--textTodo);
         span {
-          transition: 0.3s;
+          transition: 0.2s;
         }
         span.text-todo-active {
           text-decoration: line-through;

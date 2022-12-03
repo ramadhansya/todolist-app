@@ -51,7 +51,8 @@ const InputGroup = ()=>{
             }
 
             // event untuk tambah todo
-            const addTodo = ()=>{
+            const addTodo = (e)=>{
+                e.preventDefault()
                 if(validator.isEmpty(valueTodo,{ ignore_whitespace:true })){
                     notice.play()
                     setTimeout(() => {
@@ -113,12 +114,15 @@ const InputGroup = ()=>{
 
     return(
         <>
+        
+        <form action="" onSubmit={addTodo}>
         <section className="input-group">
            <input type="text" value={valueTodo} placeholder="Create a new Todo..." onChange={inputValue} className="input-todo" />
-           <button className="input-check" onClick={addTodo}>
+           <button className="input-check" type="submit">
                <i className="fa-solid fa-plus"></i>
            </button>
         </section>
+        </form>
         <section className="todo-list-container">
         {
             (todos.length < 1) ? 
