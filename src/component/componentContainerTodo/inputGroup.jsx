@@ -1,5 +1,8 @@
 import {useState,useRef,useEffect} from 'react';
 
+// import npm validator
+import validator from 'validator'
+
 // COMPONENT LIST TODO
 const ListTodo = ({todo,dataBtnId,changeModal,eventCompleted})=>{
     return(
@@ -105,7 +108,7 @@ const InputGroup = ()=>{
 
             // event untuk tambah todo
             const addTodo = ()=>{
-                if(valueTodo === ''){
+                if(validator.isEmpty(valueTodo,{ ignore_whitespace:true })){
                     notice.play()
                     setTimeout(() => {
                         alertUndefined.current.classList.replace('hide','show')
@@ -161,7 +164,7 @@ const InputGroup = ()=>{
         }
 
 
-        
+    
 
 
     return(
