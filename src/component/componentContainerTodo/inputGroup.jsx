@@ -1,11 +1,11 @@
 import {useState,useRef,useEffect} from 'react';
 
 // COMPONENT LIST TODO
-const ListTodo = ({todo,dataBtnId,changeModal})=>{
+const ListTodo = ({todo,dataBtnId,changeModal,eventCompleted})=>{
     return(
         <div className="list-item">
             <div className="check-list">
-                    <button className="circle-list">
+                    <button className="circle-list" onClick={eventCompleted}>
                         <img src="./assets/images/icon-check.svg" alt="" />
                     </button>
             </div>
@@ -150,6 +150,11 @@ const InputGroup = ()=>{
             return
         }
 
+        // event completed tood
+        const completed = (e)=>{
+console.log(e.target)
+        }
+
 
         
 
@@ -168,7 +173,7 @@ const InputGroup = ()=>{
             <ListTodo  todo='you dont have any todo' dataBtnId="0"/>
             :
             todos.map(e =>{
-                return <ListTodo key={e.id} todo={e.todo} dataBtnId={e.id} changeModal={changeIdModal}  />
+                return <ListTodo key={e.id} todo={e.todo} dataBtnId={e.id} changeModal={changeIdModal} eventComplete={completed}  />
             }) 
         }
         </section>
