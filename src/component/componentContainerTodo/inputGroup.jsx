@@ -116,8 +116,11 @@ const InputGroup = ()=>{
                     }, 500);
                     return 
                 }
-                
+                alertUndefined.current.classList.add('showing')
+                setTimeout(() => {
+                    alertUndefined.current.classList.remove('showing')
                 alertUndefined.current.classList.replace('show','hide')
+                }, 150);
                 
                 // set object
                 let newTodo = {
