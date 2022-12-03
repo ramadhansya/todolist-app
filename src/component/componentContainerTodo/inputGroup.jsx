@@ -95,6 +95,9 @@ const InputGroup = ()=>{
             // useRef untuk compone AlertUndefinedTodo
             const alertUndefined = useRef(null)
 
+            // useRef untuk element audio
+            const [notice,setNotice] = useState(new Audio('./assets/notice.mp3'))
+
             
 
 
@@ -106,11 +109,16 @@ const InputGroup = ()=>{
             // event untuk tambah todo
             const addTodo = ()=>{
                 if(valueTodo === ''){
-                    alertUndefined.current.classList.replace('hide','show')
+                    notice.play()
+                    setTimeout(() => {
+                        alertUndefined.current.classList.replace('hide','show')
                     alertUndefined.current.classList.remove('showing')
+                    }, 500);
                     return 
                 }
+                
                 alertUndefined.current.classList.replace('show','hide')
+                
                 // set object
                 let newTodo = {
                 id:id,
@@ -138,9 +146,7 @@ const InputGroup = ()=>{
             return
         }
 
-        useEffect(()=>{
-            console.log(alertUndefined)
-        },[])
+
         
 
 
@@ -168,6 +174,7 @@ const InputGroup = ()=>{
         <ModalDelete dataIdModal={idModal} eventDelete={deleteTodo}/>
         {/* componet alert input undifed */}
         <AlertUndefinedComponent refElement={alertUndefined}/>
+        
         </>
     )
 }
