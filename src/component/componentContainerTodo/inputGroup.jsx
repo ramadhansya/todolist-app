@@ -1,4 +1,4 @@
-import {useState,useRef,useEffect} from 'react';
+import {useState,useRef} from 'react';
 
 // import npm validator
 import validator from 'validator'
@@ -89,7 +89,8 @@ const InputGroup = ()=>{
             if(e.target.classList.contains('btn-hapus')){
                 let filter = todos.filter(el => el.id != e.target.dataset.idmodal )
               setTodo(filter)
-                return    
+              document.querySelector('.img-checking').removeEventListener('click',deleteTodo)
+                return  
             }
             return
         }
@@ -106,7 +107,8 @@ const InputGroup = ()=>{
         // event clear all todo
         const clearAllTodo = ()=>{
               let filterNothing = todos.filter(e => e.id === null);
-        }
+            setTodo(filterNothing)
+            }
 
 
     
@@ -134,12 +136,15 @@ const InputGroup = ()=>{
         }
         </section>
         {/* component sorting todo */}
-        <SortingTodo todos={todos.length} eventClear={clearAllTodo}/>
+        <SortingTodo todos={todos.length} alert={alertUndefined}/>
         {/* component modal delete */}
-        <ModalDelete dataIdModal={idModal} eventDelete={deleteTodo}/>
+        <ModalDelete dataIdModal={idModal} eventDelete={deleteTodo} textModalBody='apakah anda yakin ingin menghapusnya?' idModal='modalDeleteItem'/>
         {/* componet alert input undifed */}
         <AlertUndefinedComponent refElement={alertUndefined}/>
         
+        {/* modalDeleteAllTodo */}
+        {/* component modal delete */}
+        {(todos.length > 0) && <ModalDelete  eventDelete={clearAllTodo} textModalBody='apakah anda yakin ingin menghapus semua todo?' idModal='modalDeleteAll'/> }
         </>
     )
 }

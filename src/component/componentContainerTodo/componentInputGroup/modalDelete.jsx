@@ -1,7 +1,7 @@
 // COMPONENT MODEL DELETE
-const ModalDelete =({dataIdModal,eventDelete,textModalBody})=>{
+const ModalDelete =({dataIdModal,eventDelete,textModalBody,idModal})=>{
     return (
-       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div className="modal fade" id={idModal} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
        <div className="modal-dialog bg-transparent">
            <div className="modal-content modal-delete">
            <div className="modal-body text-center ">
