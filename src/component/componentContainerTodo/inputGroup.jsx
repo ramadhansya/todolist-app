@@ -40,12 +40,12 @@ const ModalDelete =({dataIdModal,eventDelete})=>{
 }
 
 // COMPONENT SORTING TODO
-const SortingTodo = ({todos})=>{
+const SortingTodo = ({todos,eventClear})=>{
     return(
         <section className="sorting-todo">
             <p className="jumlah-todo"><span className="count">{todos}</span>{(todos<1) ? 'item' : 'items left'}</p>
         
-            <p className="clear-todo">
+            <p className="clear-todo" onClick={eventClear}>
                 Clear 
             </p>
         </section>
@@ -92,7 +92,7 @@ const InputGroup = ()=>{
             // useRef untuk compone AlertUndefinedTodo
             const alertUndefined = useRef(null)
 
-            // useRef untuk element audio
+            // state untuk element audio
             const [notice,setNotice] = useState(new Audio('./assets/notice.mp3'))
 
             
@@ -146,13 +146,18 @@ const InputGroup = ()=>{
             return
         }
 
-        // event completed tood
+        // event ceklis completed todo
         const completed = (e)=>{
             let [textTodo] = e.target.parentElement.parentElement.nextElementSibling.childNodes;
             
             e.target.parentElement.classList.toggle('circle-list-active')
             e.target.classList.toggle('img-circle-active')
             textTodo.classList.toggle('text-todo-active')
+        }
+
+        // event clear all todo
+        const clearAllTodo = ()=>{
+              let filterNothing = todos.filter(e => e.id === null);
         }
 
 
@@ -178,7 +183,7 @@ const InputGroup = ()=>{
         }
         </section>
         {/* component sorting todo */}
-        <SortingTodo todos={todos.length}/>
+        <SortingTodo todos={todos.length} eventClear={clearAllTodo}/>
         {/* component modal delete */}
         <ModalDelete dataIdModal={idModal} eventDelete={deleteTodo}/>
         {/* componet alert input undifed */}
