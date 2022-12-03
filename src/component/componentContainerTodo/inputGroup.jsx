@@ -5,8 +5,8 @@ const ListTodo = ({todo,dataBtnId,changeModal,eventCompleted})=>{
     return(
         <div className="list-item">
             <div className="check-list">
-                    <button className="circle-list" >
-                        <img src="./assets/images/icon-check.svg" className="" onClick={eventCompleted} alt="" />
+                    <button className="circle-list" onClick={eventCompleted} >
+                        <img src="./assets/images/icon-check.svg" className="img-check"  alt="" />
                     </button>
             </div>
             <div className="todo-desc">
@@ -152,13 +152,19 @@ const InputGroup = ()=>{
 
         // event completed tood
         const completed = (e)=>{
-            let [textTodo] = e.target.parentElement.parentElement.nextElementSibling.childNodes;
-            console.log(textTodo)
-            console.log(e.target.parentElement)
-            console.log(e.target)
-            e.target.parentElement.classList.toggle('circle-list-active')
-            e.target.classList.toggle('img-circle-active')
-            textTodo.classList.toggle('text-todo-active')
+            // let [textTodo] = e.target.parentElement.parentElement.nextElementSibling.childNodes;
+            
+            // e.target.parentElement.classList.toggle('circle-list-active')
+            // e.target.classList.toggle('img-circle-active')
+            // textTodo.classList.toggle('text-todo-active')
+            
+            let circleList = document.querySelector('.circle-list')
+            let imgCheck = document.querySelector('.img-check') 
+            let todoText = document.querySelector('.todo-text') 
+
+                circleList.classList.toggle('circle-list-active')
+            imgCheck.classList.toggle('img-circle-active')
+            todoText.classList.toggle('text-todo-active')
         }
 
 
