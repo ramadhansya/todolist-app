@@ -5,8 +5,8 @@ const ListTodo = ({todo,dataBtnId,changeModal,eventCompleted})=>{
     return(
         <div className="list-item">
             <div className="check-list">
-                    <button className="circle-list" onClick={eventCompleted} >
-                        <img src="./assets/images/icon-check.svg" className="img-check"  alt="" />
+                    <button className="circle-list" >
+                        <img src="./assets/images/icon-check.svg" className="" onClick={eventCompleted} alt="" />
                     </button>
             </div>
             <div className="todo-desc">
@@ -44,13 +44,9 @@ const SortingTodo = ({todos})=>{
     return(
         <section className="sorting-todo">
             <p className="jumlah-todo"><span className="count">{todos}</span>{(todos<1) ? 'item' : 'items left'}</p>
-            {/* <div className="sorting-item">
-                <button className="sorting-all">all</button>
-                <button className="sorting-active">active</button>
-                <button className="sorting-completed">completed</button>
-            </div> */}
+        
             <p className="clear-todo">
-                Clear Complited
+                Clear 
             </p>
         </section>
     )
@@ -152,19 +148,11 @@ const InputGroup = ()=>{
 
         // event completed tood
         const completed = (e)=>{
-            // let [textTodo] = e.target.parentElement.parentElement.nextElementSibling.childNodes;
+            let [textTodo] = e.target.parentElement.parentElement.nextElementSibling.childNodes;
             
-            // e.target.parentElement.classList.toggle('circle-list-active')
-            // e.target.classList.toggle('img-circle-active')
-            // textTodo.classList.toggle('text-todo-active')
-            
-            let circleList = document.querySelector('.circle-list')
-            let imgCheck = document.querySelector('.img-check') 
-            let todoText = document.querySelector('.todo-text') 
-
-                circleList.classList.toggle('circle-list-active')
-            imgCheck.classList.toggle('img-circle-active')
-            todoText.classList.toggle('text-todo-active')
+            e.target.parentElement.classList.toggle('circle-list-active')
+            e.target.classList.toggle('img-circle-active')
+            textTodo.classList.toggle('text-todo-active')
         }
 
 
