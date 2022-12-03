@@ -139,11 +139,9 @@ const InputGroup = ()=>{
         <SortingTodo todos={todos.length} alert={alertUndefined}/>
         {/* component modal delete */}
         <ModalDelete dataIdModal={idModal} eventDelete={deleteTodo} textModalBody='apakah anda yakin ingin menghapusnya?' idModal='modalDeleteItem'/>
-        {/* componet alert input undifed */}
+        {/* componet alert input undefined */}
         <AlertUndefinedComponent refElement={alertUndefined}/>
-        
         {/* modalDeleteAllTodo */}
-        {/* component modal delete */}
         {(todos.length > 0) && <ModalDelete  eventDelete={clearAllTodo} textModalBody='apakah anda yakin ingin menghapus semua todo?' idModal='modalDeleteAll'/> }
         </>
     )
