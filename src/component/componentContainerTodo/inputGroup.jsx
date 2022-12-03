@@ -3,76 +3,20 @@ import {useState,useRef,useEffect} from 'react';
 // import npm validator
 import validator from 'validator'
 
-// COMPONENT LIST TODO
-const ListTodo = ({todo,dataBtnId,changeModal,eventCompleted})=>{
-    return(
-        <div className="list-item">
-            <div className="check-list">
-                    <button className="circle-list" >
-                        <img src="./assets/images/icon-check.svg" className="" onClick={eventCompleted} alt="" />
-                    </button>
-            </div>
-            <div className="todo-desc">
-              <span className="todo-text">{todo}</span>
-            </div>
-            <button className="delete-todo" style={{display:(dataBtnId == 0) ? 'none' : 'initial'}} >
-             <img src="./assets/images/icon-cross.svg"  data-bs-toggle="modal" data-id={dataBtnId} data-bs-target="#exampleModal"  className="imgDeleteTodo" alt="" onClick={changeModal} />
-            </button>
-        </div>
-        
-    )
-}
+// import component listTodo
+import ListTodo from './componentInputGroup/listTodo';
 
-// COMPONENT MODEL DELETE
-const ModalDelete =({dataIdModal,eventDelete})=>{
-    return (
-       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-       <div className="modal-dialog bg-transparent">
-           <div className="modal-content modal-delete">
-           <div className="modal-body text-center ">
-               apakah anda yakin ingin menghapusnya?
-           </div>
-           <div className="modal-footer">
-               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-               <button type="button" className="btn btn-danger btn-hapus" data-idmodal={dataIdModal}  data-bs-dismiss="modal" onClick={eventDelete}>Delete</button>
-           </div>
-           </div>
-       </div>
-       </div>
-    )
-}
+// import component modalDelete
+import ModalDelete from './componentInputGroup/modalDelete';
 
-// COMPONENT SORTING TODO
-const SortingTodo = ({todos,eventClear})=>{
-    return(
-        <section className="sorting-todo">
-            <p className="jumlah-todo"><span className="count">{todos}</span>{(todos<1) ? 'item' : 'items left'}</p>
-        
-            <p className="clear-todo" onClick={eventClear}>
-                Clear 
-            </p>
-        </section>
-    )
-}
+// import component sortingTodo
+import SortingTodo from './componentInputGroup/sortingTodo';
 
-const AlertUndefinedComponent = ({refElement})=>{
-    
-    return (
-        <>
-        <div className="toast-container position-fixed top-0 end-0 p-3 ">
-        
-        <div className="toast  fade   text-bg-danger hide " ref={refElement} role="alert" aria-live="assertive" aria-atomic="true">
-  <div className="d-flex">
-    <div className="toast-body fs-6">
-    todo tidak boleh kosong
-    </div>
-    <button type="button" className="btn-close me-2 m-auto navbar-dark" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-</div>
-        </div>
-        </>
-    )
-}
+// import component AlertUndefinedComponent
+import AlertUndefinedComponent from './componentInputGroup/alertUndefined';
+
+
+
 
 
 
