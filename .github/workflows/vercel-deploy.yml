@@ -3,7 +3,7 @@ name: Deploy to Vercel
 on:
   push:
     branches:
-      - main  # atau ganti 'main' ke 'master' jika branch kamu master
+      - master  # atau ganti 'main' ke 'master' jika branch kamu master
 
 jobs:
   deploy:
