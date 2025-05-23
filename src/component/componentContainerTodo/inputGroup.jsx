@@ -16,7 +16,6 @@ const InputGroup = () => {
   const alertUndefined = useRef(null);
   const [notice, setNotice] = useState(new Audio('./assets/notice.mp3'));
 
-  // state untuk modal update
   const [dataUpdate, setDataUpdate] = useState({});
 
   const inputValue = (e) => {
@@ -39,7 +38,7 @@ const InputGroup = () => {
       alertUndefined.current.classList.replace('show', 'hide');
     }, 150);
 
-    let newTodo = {
+    const newTodo = {
       id: id,
       todo: valueTodo,
     };
@@ -56,27 +55,25 @@ const InputGroup = () => {
 
   const deleteTodo = (e) => {
     if (e.target.classList.contains('btn-hapus')) {
-      let filter = todos.filter((el) => el.id != e.target.dataset.idmodal);
+      const filter = todos.filter((el) => el.id != e.target.dataset.idmodal);
       setTodo(filter);
       document.querySelector('.img-checking').removeEventListener('click', deleteTodo);
-      return;
     }
-    return;
   };
 
   const completed = (e) => {
-    let [textTodo] = e.target.parentElement.parentElement.nextElementSibling.childNodes;
+    const [textTodo] = e.target.parentElement.parentElement.nextElementSibling.childNodes;
     e.target.parentElement.classList.toggle('circle-list-active');
     e.target.classList.toggle('img-circle-active');
     textTodo.classList.toggle('text-todo-active');
   };
 
   const clearAllTodo = () => {
-    let filterNothing = todos.filter((e) => e.id === null);
+    const filterNothing = todos.filter((e) => e.id === null);
     setTodo(filterNothing);
   };
 
-  // modal update: buka modal
+  // Modal Update
   const openModalUpdate = (id) => {
     const todo = todos.find((t) => t.id === id);
     if (todo) {
@@ -84,8 +81,11 @@ const InputGroup = () => {
     }
   };
 
-  // modal update: simpan perubahan
   const submitUpdate = (updatedData) => {
+    if (!updatedData.id) {
+      console.error("ID tidak ditemukan saat menyimpan perubahan");
+      return;
+    }
     setTodo((prevTodos) =>
       prevTodos.map((todo) => (todo.id === updatedData.id ? updatedData : todo))
     );
@@ -119,6 +119,7 @@ const InputGroup = () => {
                 dataBtnId={e.id}
                 changeModal={changeIdModal}
                 eventCompleted={completed}
+                openModalUpdate={openModalUpdate}
               />
               <button
                 type="button"
@@ -134,10 +135,8 @@ const InputGroup = () => {
         )}
       </section>
 
-      {/* component sorting todo */}
       <SortingTodo todos={todos.length} alert={alertUndefined} />
 
-      {/* component modal delete */}
       <ModalDelete
         dataIdModal={idModal}
         eventDelete={deleteTodo}
@@ -145,7 +144,6 @@ const InputGroup = () => {
         idModal="modalDeleteItem"
       />
 
-      {/* component modal delete all */}
       {todos.length > 0 && (
         <ModalDelete
           eventDelete={clearAllTodo}
@@ -154,7 +152,6 @@ const InputGroup = () => {
         />
       )}
 
-      {/* component modal update */}
       <ModalUpdate
         idModal="modalUpdateItem"
         data={dataUpdate}
@@ -162,7 +159,6 @@ const InputGroup = () => {
         onSubmit={submitUpdate}
       />
 
-      {/* component alert undefined */}
       <AlertUndefinedComponent refElement={alertUndefined} />
     </>
   );

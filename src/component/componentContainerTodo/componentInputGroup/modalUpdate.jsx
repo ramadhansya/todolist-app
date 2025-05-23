@@ -10,7 +10,6 @@ const ModalUpdate = ({
 }) => {
   const [formData, setFormData] = useState({});
 
-  // Load data ke state saat modal dibuka
   useEffect(() => {
     setFormData(data);
   }, [data]);
@@ -21,7 +20,13 @@ const ModalUpdate = ({
   };
 
   const handleSubmit = () => {
+    console.log("Form submit:", formData);
     onSubmit(formData);
+    const modalEl = document.getElementById(idModal);
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    if (modal) {
+      modal.hide();
+    }
   };
 
   return (
@@ -34,6 +39,7 @@ const ModalUpdate = ({
           </div>
           <div className="modal-body">
             <form>
+              <input type="hidden" name="id" value={formData.id || ''} />
               {fields.map(field => (
                 <div className="mb-3" key={field.name}>
                   <label htmlFor={field.name} className="form-label">{field.label}</label>
@@ -53,8 +59,7 @@ const ModalUpdate = ({
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             <button 
               type="button" 
-              className="btn btn-primary" 
-              data-bs-dismiss="modal" 
+              className="btn btn-primary"  
               onClick={handleSubmit}
             >
               Save Changes
@@ -76,6 +81,11 @@ ModalUpdate.propTypes = {
   })).isRequired,
   onSubmit: PropTypes.func.isRequired,
   modalTitle: PropTypes.string,
+};
+
+ModalUpdate.defaultProps = {
+  modalTitle: 'Update Data',
+  fields: [{ name: 'text', label: 'Update Todo' }],
 };
 
 export default ModalUpdate;
