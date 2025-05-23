@@ -14,7 +14,7 @@ const ParentComponent = () => {
     const todo = todos.find(t => t.id === id);
     setSelectedTodo(todo || {});
 
-    // buka modal bootstrap (pastikan bootstrap.js sudah include)
+    // gunakan id modal yang sesuai dengan ModalUpdate
     const modalEl = document.getElementById('modalUpdate');
     const modal = new window.bootstrap.Modal(modalEl);
     modal.show();
