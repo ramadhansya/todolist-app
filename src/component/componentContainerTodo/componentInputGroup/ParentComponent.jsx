@@ -16,12 +16,12 @@ const ParentComponent = () => {
 
     // gunakan id modal yang sesuai dengan ModalUpdate
     const modalEl = document.getElementById('modalUpdate');
-    const modal = new window.bootstrap.Modal(modalEl);
+    const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
     modal.show();
   };
 
   const handleUpdateSubmit = (updatedData) => {
-    console.log("Data diterima di parent:", updatedData);
+    // console.log("Data diterima di parent:", updatedData);
     setTodos(prev =>
       prev.map(todo => (todo.id === updatedData.id ? updatedData : todo))
     );
@@ -34,7 +34,7 @@ const ParentComponent = () => {
 
       // Hapus backdrop jika masih ada
       document.body.classList.remove('modal-open');
-      document.querySelectorAll('.modal-backdrop').forEach(bd => bd.remove());
+      document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
     }
   };
 
