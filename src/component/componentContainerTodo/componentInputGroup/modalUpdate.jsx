@@ -24,7 +24,9 @@ const ModalUpdate = ({
     onSubmit(formData);
     const modalEl = document.getElementById(idModal);
     const modal = window.bootstrap.Modal.getInstance(modalEl);
-    if (modal) modal.hide();
+    if (modal) {
+      modal.hide();
+    }
   };
 
   return (
