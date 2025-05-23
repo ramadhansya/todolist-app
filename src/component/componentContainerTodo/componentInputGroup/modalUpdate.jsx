@@ -14,6 +14,13 @@ const ModalUpdate = ({
     setFormData(data);
   }, [data]);
 
+    useEffect(() => {
+        const modalEl = document.getElementById(idModal);
+        if (modalEl && !window.bootstrap.Modal.getInstance(modalEl)) {
+            new window.bootstrap.Modal(modalEl);
+        }
+    }, [idModal]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
