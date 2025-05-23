@@ -11,8 +11,9 @@ const ModalUpdate = ({ idModal, data, fields, onSubmit, modalTitle = 'Update Dat
   // Optional: Inisialisasi modal Bootstrap saat mount
   useEffect(() => {
     const modalEl = document.getElementById(idModal);
-    if (modalEl && !window.bootstrap.Modal.getInstance(modalEl)) {
-      new window.bootstrap.Modal(modalEl);
+    if (modalEl) {
+      window.bootstrap.Modal.getOrCreateInstance(modalEl);
+
     }
   }, [idModal]);
 
@@ -27,6 +28,11 @@ const ModalUpdate = ({ idModal, data, fields, onSubmit, modalTitle = 'Update Dat
     const modal = window.bootstrap.Modal.getInstance(modalEl);
     if (modal) {
       modal.hide();
+
+      // Pastikan overlay (backdrop) juga dihapus
+      document.body.classList.remove('modal-open');
+      const backdrops = document.querySelectorAll('.modal-backdrop');
+      backdrops.forEach(bd => bd.remove());
     }
   };
 
