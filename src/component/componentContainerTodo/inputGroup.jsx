@@ -89,18 +89,7 @@ const InputGroup = () => {
     setTodo((prevTodos) =>
       prevTodos.map((todo) => (todo.id === updatedData.id ? updatedData : todo))
     );
-  };
-  
-  {todos.map((e) => (
-  <div key={e.id}>
-    <ListTodo
-      todo={e.todo}
-      dataBtnId={e.id}
-      changeModal={changeIdModal}
-      eventCompleted={completed}
-      openModalUpdate={openModalUpdate}
-    />
-  </div>
+  };  
 ))}
 
 
