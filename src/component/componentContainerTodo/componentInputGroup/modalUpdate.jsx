@@ -22,6 +22,9 @@ const ModalUpdate = ({
   const handleSubmit = () => {
     console.log("Form submit:", formData);
     onSubmit(formData);
+    const modalEl = document.getElementById(idModal);
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    if (modal) modal.hide();
   };
 
   return (
@@ -54,8 +57,7 @@ const ModalUpdate = ({
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             <button 
               type="button" 
-              className="btn btn-primary" 
-              data-bs-dismiss="modal" 
+              className="btn btn-primary"  
               onClick={handleSubmit}
             >
               Save Changes
