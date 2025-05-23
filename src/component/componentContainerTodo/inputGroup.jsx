@@ -90,6 +90,16 @@ const InputGroup = () => {
       prevTodos.map((todo) => (todo.id === updatedData.id ? updatedData : todo))
     );
   };  
+  {todos.map((e) => (
+  <div key={e.id}>
+    <ListTodo
+      todo={e.todo}
+      dataBtnId={e.id}
+      changeModal={changeIdModal}
+      eventCompleted={completed}
+      openModalUpdate={openModalUpdate}
+    />
+  </div>
 ))}
 
 
@@ -122,15 +132,6 @@ const InputGroup = () => {
                 changeModal={changeIdModal}
                 eventCompleted={completed}
               />
-              <button
-                type="button"
-                className="btn btn-warning m-2"
-                data-bs-toggle="modal"
-                data-bs-target="#modalUpdateItem"
-                onClick={() => openModalUpdate(e.id)}
-              >
-                Edit
-              </button>
             </div>
           ))
         )}
