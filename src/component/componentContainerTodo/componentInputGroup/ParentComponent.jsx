@@ -25,7 +25,20 @@ const ParentComponent = () => {
     setTodos(prev =>
       prev.map(todo => (todo.id === updatedData.id ? updatedData : todo))
     );
+
+    // Tutup modal + hapus backdrop
+    const modalEl = document.getElementById('modalUpdate');
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    if (modal) {
+      modal.hide();
+
+      // Hapus backdrop jika masih ada
+      document.body.classList.remove('modal-open');
+      document.querySelectorAll('.modal-backdrop').forEach(bd => bd.remove());
+    }
   };
+
+
 
   return (
     <>
