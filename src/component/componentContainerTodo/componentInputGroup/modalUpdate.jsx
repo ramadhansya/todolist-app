@@ -10,26 +10,19 @@ const ModalUpdate = ({
 }) => {
   const [formData, setFormData] = useState({});
 
-  // Load data ke state saat modal dibuka
   useEffect(() => {
     setFormData(data);
   }, [data]);
 
- const handleChange = (e) => {
-  const { name, value } = e.target;
-  setFormData(prev => ({ 
-    ...prev, 
-    [name]: value 
-  }));
-};
-<input type="hidden" name="id" value={formData.id || ''} />
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-
-const handleSubmit = () => {
-  console.log("Form submit:", formData);
-  onSubmit(formData);
-};
-
+  const handleSubmit = () => {
+    console.log("Form submit:", formData);
+    onSubmit(formData);
+  };
 
   return (
     <div className="modal fade" id={idModal} tabIndex="-1" aria-labelledby={`${idModal}Label`} aria-hidden="true">
@@ -41,6 +34,7 @@ const handleSubmit = () => {
           </div>
           <div className="modal-body">
             <form>
+              <input type="hidden" name="id" value={formData.id || ''} />
               {fields.map(field => (
                 <div className="mb-3" key={field.name}>
                   <label htmlFor={field.name} className="form-label">{field.label}</label>
@@ -83,6 +77,11 @@ ModalUpdate.propTypes = {
   })).isRequired,
   onSubmit: PropTypes.func.isRequired,
   modalTitle: PropTypes.string,
+};
+
+ModalUpdate.defaultProps = {
+  modalTitle: 'Update Data',
+  fields: [{ name: 'text', label: 'Update Todo' }],
 };
 
 export default ModalUpdate;
