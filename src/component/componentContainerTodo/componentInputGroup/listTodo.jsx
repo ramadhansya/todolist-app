@@ -13,8 +13,8 @@ const ListTodo = ({ todo, dataBtnId, changeModal, eventCompleted, openModalUpdat
             <div className="todo-actions">
                 <button
                     className="btn btn-sm btn-warning me-1"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalUpdateItem"
+                    // data-bs-toggle="modal"
+                    // data-bs-target="#modalUpdateItem"
                     onClick={() => openModalUpdate(dataBtnId)}
                     style={{ display: dataBtnId == 0 ? 'none' : 'inline-block' }}
                 >
@@ -23,9 +23,9 @@ const ListTodo = ({ todo, dataBtnId, changeModal, eventCompleted, openModalUpdat
                 <button className="delete-todo" style={{ display: dataBtnId == 0 ? 'none' : 'initial' }}>
                     <img
                         src="./assets/images/icon-cross.svg"
-                        data-bs-toggle="modal"
+                        // data-bs-toggle="modal"
                         data-id={dataBtnId}
-                        data-bs-target="#modalUpdate"
+                        // data-bs-target="#modalUpdate"
                         className="imgDeleteTodo"
                         alt=""
                         onClick={changeModal}
