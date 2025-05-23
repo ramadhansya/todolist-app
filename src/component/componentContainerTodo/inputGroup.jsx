@@ -1,152 +1,171 @@
-import {useState,useRef} from 'react';
+import { useState, useRef, useEffect } from 'react';
+import validator from 'validator';
 
-// import npm validator
-import validator from 'validator'
-
-// import component listTodo
+// import komponen
 import ListTodo from './componentInputGroup/listTodo';
-
-// import component modalDelete
 import ModalDelete from './componentInputGroup/modalDelete';
-
-// import component sortingTodo
 import SortingTodo from './componentInputGroup/sortingTodo';
-
-// import component AlertUndefinedComponent
 import AlertUndefinedComponent from './componentInputGroup/alertUndefined';
+import ModalUpdate from './componentInputGroup/modalUpdate';
 
+const InputGroup = () => {
+  const [todos, setTodo] = useState([]);
+  const [valueTodo, setValueTodo] = useState('');
+  const [id, setId] = useState(1);
+  const [idModal, setIdModal] = useState(null);
+  const alertUndefined = useRef(null);
+  const [notice, setNotice] = useState(new Audio('./assets/notice.mp3'));
 
+  // state untuk modal update
+  const [dataUpdate, setDataUpdate] = useState({});
 
+  const inputValue = (e) => {
+    setValueTodo(e.target.value);
+  };
 
+  const addTodo = (e) => {
+    e.preventDefault();
+    if (validator.isEmpty(valueTodo, { ignore_whitespace: true })) {
+      notice.play();
+      setTimeout(() => {
+        alertUndefined.current.classList.replace('hide', 'show');
+        alertUndefined.current.classList.remove('showing');
+      }, 500);
+      return;
+    }
+    alertUndefined.current.classList.add('showing');
+    setTimeout(() => {
+      alertUndefined.current.classList.remove('showing');
+      alertUndefined.current.classList.replace('show', 'hide');
+    }, 150);
 
+    let newTodo = {
+      id: id,
+      todo: valueTodo,
+    };
 
+    setId((oldId) => oldId + 1);
+    setTodo([...todos, newTodo]);
+    setValueTodo('');
+  };
 
-// component input group
-const InputGroup = ()=>{
+  const changeIdModal = (e) => {
+    setIdModal(e.target.dataset.id);
+    alertUndefined.current.classList.replace('show', 'hide');
+  };
 
-            // state for todo 
-            const [todos,setTodo] = useState([])
+  const deleteTodo = (e) => {
+    if (e.target.classList.contains('btn-hapus')) {
+      let filter = todos.filter((el) => el.id != e.target.dataset.idmodal);
+      setTodo(filter);
+      document.querySelector('.img-checking').removeEventListener('click', deleteTodo);
+      return;
+    }
+    return;
+  };
 
-            // state for value input
-            const [valueTodo,setValueTodo] = useState('');
+  const completed = (e) => {
+    let [textTodo] = e.target.parentElement.parentElement.nextElementSibling.childNodes;
+    e.target.parentElement.classList.toggle('circle-list-active');
+    e.target.classList.toggle('img-circle-active');
+    textTodo.classList.toggle('text-todo-active');
+  };
 
-            // state untk data id todo
-            const [id,setId] = useState(1)
+  const clearAllTodo = () => {
+    let filterNothing = todos.filter((e) => e.id === null);
+    setTodo(filterNothing);
+  };
 
-            // state for modal id
-            const [idModal,setIdModal] = useState(null)
+  // modal update: buka modal
+  const openModalUpdate = (id) => {
+    const todo = todos.find((t) => t.id === id);
+    if (todo) {
+      setDataUpdate(todo);
+    }
+  };
 
-            // useRef untuk compone AlertUndefinedTodo
-            const alertUndefined = useRef(null)
+  // modal update: simpan perubahan
+  const submitUpdate = (updatedData) => {
+    setTodo((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === updatedData.id ? updatedData : todo))
+    );
+  };
 
-            // state untuk element audio
-            const [notice,setNotice] = useState(new Audio('./assets/notice.mp3'))
-
-            
-
-
-            // event untuk ambil value input
-            const inputValue = (e) =>{
-                setValueTodo(e.target.value) 
-            }
-
-            // event untuk tambah todo
-            const addTodo = (e)=>{
-                e.preventDefault()
-                if(validator.isEmpty(valueTodo,{ ignore_whitespace:true })){
-                    notice.play()
-                    setTimeout(() => {
-                        alertUndefined.current.classList.replace('hide','show')
-                    alertUndefined.current.classList.remove('showing')
-                    }, 500);
-                    return 
-                }
-                alertUndefined.current.classList.add('showing')
-                setTimeout(() => {
-                    alertUndefined.current.classList.remove('showing')
-                alertUndefined.current.classList.replace('show','hide')
-                }, 150);
-                
-                // set object
-                let newTodo = {
-                id:id,
-                todo:valueTodo
-                }
-
-            setId((oldId) => oldId+=1)
-            setTodo([...todos,newTodo])
-            setValueTodo('')
-          }
-
-        // event untuk memberikan data id ke data-idmodal
-        const changeIdModal = (e)=>{
-              setIdModal(e.target.dataset.id)
-              alertUndefined.current.classList.replace('show','hide')
-        }
-
-        // event delete todo
-        const deleteTodo = (e)=>{
-            if(e.target.classList.contains('btn-hapus')){
-                let filter = todos.filter(el => el.id != e.target.dataset.idmodal )
-              setTodo(filter)
-              document.querySelector('.img-checking').removeEventListener('click',deleteTodo)
-                return  
-            }
-            return
-        }
-
-        // event ceklis completed todo
-        const completed = (e)=>{
-            let [textTodo] = e.target.parentElement.parentElement.nextElementSibling.childNodes;
-            
-            e.target.parentElement.classList.toggle('circle-list-active')
-            e.target.classList.toggle('img-circle-active')
-            textTodo.classList.toggle('text-todo-active')
-        }
-
-        // event clear all todo
-        const clearAllTodo = ()=>{
-              let filterNothing = todos.filter(e => e.id === null);
-            setTodo(filterNothing)
-            }
-
-
-    
-
-
-    return(
-        <>
-        
-        <form action="" onSubmit={addTodo}>
+  return (
+    <>
+      <form onSubmit={addTodo}>
         <section className="input-group">
-           <input type="text" value={valueTodo} placeholder="Create a new Todo..." onChange={inputValue} className="input-todo" />
-           <button className="input-check" type="submit">
-               <i className="fa-solid fa-plus"></i>
-           </button>
+          <input
+            type="text"
+            value={valueTodo}
+            placeholder="Create a new Todo..."
+            onChange={inputValue}
+            className="input-todo"
+          />
+          <button className="input-check" type="submit">
+            <i className="fa-solid fa-plus"></i>
+          </button>
         </section>
-        </form>
-        <section className="todo-list-container">
-        {
-            (todos.length < 1) ? 
-            <ListTodo  todo='you dont have any todo' dataBtnId="0"/>
-            :
-            todos.map(e =>{
-                return <ListTodo key={e.id} todo={e.todo} dataBtnId={e.id} changeModal={changeIdModal} eventCompleted={completed}  />
-            }) 
-        }
-        </section>
-        {/* component sorting todo */}
-        <SortingTodo todos={todos.length} alert={alertUndefined}/>
-        {/* component modal delete */}
-        <ModalDelete dataIdModal={idModal} eventDelete={deleteTodo} textModalBody='apakah anda yakin ingin menghapusnya?' idModal='modalDeleteItem'/>
-        {/* componet alert input undefined */}
-        <AlertUndefinedComponent refElement={alertUndefined}/>
-        {/* modalDeleteAllTodo */}
-        {(todos.length > 0) && <ModalDelete  eventDelete={clearAllTodo} textModalBody='apakah anda yakin ingin menghapus semua todo?' idModal='modalDeleteAll'/> }
-        </>
-    )
-}
+      </form>
 
+      <section className="todo-list-container">
+        {todos.length < 1 ? (
+          <ListTodo todo="you don't have any todo" dataBtnId="0" />
+        ) : (
+          todos.map((e) => (
+            <div key={e.id}>
+              <ListTodo
+                todo={e.todo}
+                dataBtnId={e.id}
+                changeModal={changeIdModal}
+                eventCompleted={completed}
+              />
+              <button
+                type="button"
+                className="btn btn-warning m-2"
+                data-bs-toggle="modal"
+                data-bs-target="#modalUpdateItem"
+                onClick={() => openModalUpdate(e.id)}
+              >
+                Edit
+              </button>
+            </div>
+          ))
+        )}
+      </section>
 
+      {/* component sorting todo */}
+      <SortingTodo todos={todos.length} alert={alertUndefined} />
+
+      {/* component modal delete */}
+      <ModalDelete
+        dataIdModal={idModal}
+        eventDelete={deleteTodo}
+        textModalBody="Apakah Anda yakin ingin menghapusnya?"
+        idModal="modalDeleteItem"
+      />
+
+      {/* component modal delete all */}
+      {todos.length > 0 && (
+        <ModalDelete
+          eventDelete={clearAllTodo}
+          textModalBody="Apakah Anda yakin ingin menghapus semua todo?"
+          idModal="modalDeleteAll"
+        />
+      )}
+
+      {/* component modal update */}
+      <ModalUpdate
+        idModal="modalUpdateItem"
+        data={dataUpdate}
+        fields={[{ name: 'todo', label: 'Update Todo' }]}
+        onSubmit={submitUpdate}
+      />
+
+      {/* component alert undefined */}
+      <AlertUndefinedComponent refElement={alertUndefined} />
+    </>
+  );
+};
 
 export default InputGroup;
