@@ -21,6 +21,7 @@ const ParentComponent = () => {
   };
 
   const handleUpdateSubmit = (updatedData) => {
+    console.log("Data diterima di parent:", updatedData);
     setTodos(prev =>
       prev.map(todo => (todo.id === updatedData.id ? updatedData : todo))
     );
