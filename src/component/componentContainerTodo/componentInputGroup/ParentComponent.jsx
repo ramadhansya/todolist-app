@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ListTodo from './ListTodo';
-import ModalUpdate from './ModalUpdate';
+import ListTodo from './listTodo';
+import ModalUpdate from './modalUpdate';
 
 const ParentComponent = () => {
   const [todos, setTodos] = useState([
@@ -16,7 +16,7 @@ const ParentComponent = () => {
 
     // buka modal bootstrap (pastikan bootstrap.js sudah include)
     const modalEl = document.getElementById('modalUpdate');
-    const modal = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+    const modal = new window.bootstrap.Modal(modalEl);
     modal.show();
   };
 
