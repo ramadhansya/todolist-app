@@ -1,25 +1,20 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
-const ModalUpdate = ({ 
-  idModal, 
-  data, 
-  fields, 
-  onSubmit, 
-  modalTitle = 'Update Data' 
-}) => {
+const ModalUpdate = ({ idModal, data, fields, onSubmit, modalTitle = 'Update Data' }) => {
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
     setFormData(data);
   }, [data]);
 
-    useEffect(() => {
-        const modalEl = document.getElementById(idModal);
-        if (modalEl && !window.bootstrap.Modal.getInstance(modalEl)) {
-            new window.bootstrap.Modal(modalEl);
-        }
-    }, [idModal]);
+  // Optional: Inisialisasi modal Bootstrap saat mount
+  useEffect(() => {
+    const modalEl = document.getElementById(idModal);
+    if (modalEl && !window.bootstrap.Modal.getInstance(modalEl)) {
+      new window.bootstrap.Modal(modalEl);
+    }
+  }, [idModal]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +22,6 @@ const ModalUpdate = ({
   };
 
   const handleSubmit = () => {
-    console.log("Form submit:", formData);
     onSubmit(formData);
     const modalEl = document.getElementById(idModal);
     const modal = window.bootstrap.Modal.getInstance(modalEl);
@@ -64,11 +58,7 @@ const ModalUpdate = ({
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button 
-              type="button" 
-              className="btn btn-primary"  
-              onClick={handleSubmit}
-            >
+            <button type="button" className="btn btn-primary" onClick={handleSubmit}>
               Save Changes
             </button>
           </div>
@@ -81,11 +71,13 @@ const ModalUpdate = ({
 ModalUpdate.propTypes = {
   idModal: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
-  fields: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    type: PropTypes.string
-  })).isRequired,
+  fields: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      type: PropTypes.string,
+    })
+  ).isRequired,
   onSubmit: PropTypes.func.isRequired,
   modalTitle: PropTypes.string,
 };
