@@ -85,11 +85,16 @@ const InputGroup = () => {
   };
 
   // modal update: simpan perubahan
-  const submitUpdate = (updatedData) => {
-    setTodo((prevTodos) =>
-      prevTodos.map((todo) => (todo.id === updatedData.id ? updatedData : todo))
-    );
-  };  
+const submitUpdate = (updatedData) => {
+  if (!updatedData.id) {
+    console.error("ID tidak ditemukan saat menyimpan perubahan");
+    return;
+  }
+  setTodo((prevTodos) =>
+    prevTodos.map((todo) => (todo.id === updatedData.id ? updatedData : todo))
+  );
+};
+
   {todos.map((e) => (
   <div key={e.id}>
     <ListTodo
