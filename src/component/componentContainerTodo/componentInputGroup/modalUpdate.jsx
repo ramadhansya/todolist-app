@@ -15,14 +15,21 @@ const ModalUpdate = ({
     setFormData(data);
   }, [data]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+ const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData(prev => ({ 
+    ...prev, 
+    [name]: value 
+  }));
+};
+<input type="hidden" name="id" value={formData.id || ''} />
 
-  const handleSubmit = () => {
-    onSubmit(formData);
-  };
+
+const handleSubmit = () => {
+  console.log("Form submit:", formData);
+  onSubmit(formData);
+};
+
 
   return (
     <div className="modal fade" id={idModal} tabIndex="-1" aria-labelledby={`${idModal}Label`} aria-hidden="true">
